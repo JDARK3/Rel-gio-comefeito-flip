@@ -1,0 +1,145 @@
+/* Estilos globais */
+* {
+    box-sizing: border-box; /* Inclui padding e border no cálculo de largura e altura */
+    margin: 0; /* Remove margens padrão dos elementos */
+    padding: 0; /* Remove preenchimento padrão dos elementos */
+    border-radius: 7px; /* Adiciona bordas arredondadas a todos os elementos */
+   
+}
+
+body {
+    display: flex; /* Define o layout do body como flexível */
+    justify-content: center; /* Centraliza horizontalmente o conteúdo */
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    height: 100vh; /* Define a altura do body como 100% da altura da janela de visualização */
+    background-color: #5a22dd; /* Define uma cor de fundo clara para o body */
+    overflow: hidden; /* Remove barras de rolagem */
+    position: relative; /* Define a posição relativa para permitir o uso de z-index nos filhos */
+}
+
+/* Estilos para o fundo */
+.fundo {
+    position: absolute; /* Posiciona a imagem como absoluta em relação ao body */
+    top: 0; /* Posiciona o fundo no topo da página */
+    left: 0; /* Posiciona o fundo à esquerda da página */
+    width: 100%; /* Define a largura do fundo como 100% da largura da página */
+    height: 100%; /* Define a altura do fundo como 100% da altura da página */
+    z-index: -1; /* Coloca a imagem atrás dos outros elementos */
+    overflow: hidden; /* Garante que a imagem não exceda os limites do contêiner */
+}
+
+.fundo img {
+    width: 100%; /* Faz a imagem ocupar toda a largura do fundo */
+    height: 100%; /* Faz a imagem ocupar toda a altura do fundo */
+    object-fit: cover; /* Faz a imagem cobrir o fundo sem distorção */
+}
+
+/* Estilos para o countdown */
+.countdown {/*criaumacaixaemvoltadorelógio*/
+    display: flex; /* Define o layout do countdown como flexível */
+    gap: 50px; /* Adiciona um espaço de 50px entre os segmentos de tempo */
+    font-family: Arial, Helvetica, sans-serif; /* Define a fonte para o countdown */
+}
+
+.time-section {
+    text-align: center; /* Centraliza o texto dentro da seção de tempo */
+    font-size: 30px; /* Define o tamanho da fonte para a seção de tempo */
+}
+
+.time-group {
+    display: flex; /* Define o layout dos grupos de tempo como flexível */
+    gap: 10px; /* Adiciona um espaço de 10px entre os grupos de tempo */
+}
+
+.time-segment {
+    display: block; /* Faz com que cada segmento de tempo seja um bloco */
+    font-size: 100px; /* Define o tamanho da fonte para o segmento de tempo */
+    font-weight: 900; /* Define a espessura da fonte como muito grossa */
+    width: 100px; /* Define a largura de cada segmento de tempo */
+}
+
+.segment-display {
+    position: relative; /* Define a posição relativa para permitir o uso de posicionamento absoluto dos filhos */
+    height: 100%; /* Define a altura do display como 100% do contêiner pai */
+}
+
+.segment-display__top,
+.segment-display__bottom {
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites do segmento */
+    text-align: center; /* Centraliza o texto dentro dos segmentos */
+    width: 100%; /* Define a largura dos segmentos como 100% do contêiner pai */
+    height: 50%; /* Define a altura dos segmentos como 50% do contêiner pai */
+    position: relative; /* Define a posição relativa dos segmentos */
+}
+
+.segment-display__top {
+    background-color: #111; /* Define a cor de fundo superior do display */
+    color: #eee; /* Define a cor do texto superior do display */
+    line-height: 1.5; /* Define a altura da linha para o texto superior do display */
+}
+
+.segment-display__bottom {
+    background-color: #333; /* Define a cor de fundo inferior do display */
+    color: #fff; /* Define a cor do texto inferior do display */
+    line-height: 0; /* Define a altura da linha para o texto inferior do display */
+}
+
+.segment-overlay {
+    position: absolute; /* Posiciona a sobreposição como absoluta em relação ao segment-display */
+    top: 0; /* Posiciona a sobreposição no topo do segmento */
+    height: 100%; /* Define a altura da sobreposição como 100% do segmento */
+    width: 100px; /* Define a largura da sobreposição */
+    perspective: 400px; /* Define a perspectiva para efeitos de rotação 3D */
+}
+
+.segment-overlay__top,
+.segment-overlay__bottom {
+    position: absolute; /* Posiciona a parte superior e inferior da sobreposição como absolutas em relação à sobreposição */
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites da sobreposição */
+    text-align: center; /* Centraliza o texto dentro das partes da sobreposição */
+    width: 100%; /* Define a largura das partes da sobreposição como 100% da sobreposição */
+    height: 50%; /* Define a altura das partes da sobreposição como 50% da sobreposição */
+}
+
+.segment-overlay__top {
+    top: 0; /* Posiciona a parte superior da sobreposição no topo */
+    line-height: 1.5; /* Define a altura da linha para o texto na parte superior */
+    color: #eee; /* Define a cor do texto na parte superior */
+    background-color: #111; /* Define a cor de fundo da parte superior */
+    transform-origin: bottom; /* Define o ponto de origem da transformação na parte inferior */
+}
+
+.segment-overlay__bottom {
+    bottom: 0; /* Posiciona a parte inferior da sobreposição na parte inferior */
+    line-height: 0; /* Define a altura da linha para o texto na parte inferior */
+    color: #fff; /* Define a cor do texto na parte inferior */
+    background-color: #333; /* Define a cor de fundo da parte inferior */
+    border-top: 2px solid black; /* Adiciona uma borda superior preta à parte inferior */
+    transform-origin: top; /* Define o ponto de origem da transformação na parte superior */
+}
+
+.segment-overlay.flip .segment-overlay__top {
+    animation: flip-top 0.8s linear; /* Aplica a animação flip-top à parte superior quando a classe 'flip' é adicionada */
+}
+
+.segment-overlay.flip .segment-overlay__bottom {
+    animation: flip-bottom 0.8s linear; /* Aplica a animação flip-bottom à parte inferior quando a classe 'flip' é adicionada */
+}
+
+@keyframes flip-top {
+    0% {
+        transform: rotatex(0deg); /* Início da animação: sem rotação */
+    }
+    50%, 100% {
+        transform: rotatex(-90deg); /* Meio e fim da animação: rotação de -90 graus */
+    }
+}
+
+@keyframes flip-bottom {
+    0%, 50% {
+        transform: rotatex(90deg); /* Início e meio da animação: rotação de 90 graus */
+    }
+    100% {
+        transform: rotatex(0deg); /* Fim da animação: volta a posição original */
+    }
+}
